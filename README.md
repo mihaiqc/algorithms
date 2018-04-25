@@ -13,8 +13,20 @@ Thanks for your interest in contributing! There are many ways to contribute to t
 
 
 ## Tests
-To run the tests, clone the repo and run :  
- ```pytest```
+
+### Use unittest
+For running all tests write down:
+
+    $ python3 -m unittest discover tests
+
+For running some specific tests you can do this as following (Ex: sort):
+
+    $ python3 -m unittest tests.test_sort
+
+### Use pytest
+For running all tests write down:
+
+    $ python3 -m pytest tests
 
 ## List of Implementations
 
@@ -121,6 +133,7 @@ To run the tests, clone the repo and run :
     - [remove_range](linkedlist/remove_range.py)
 - [map](map)
     - [hashtable](map/hashtable.py)
+    - [separate_chaining_hashtable](map/separate_chaining_hashtable.py)
     - [longest_common_subsequence](map/longest_common_subsequence.py)
     - [randomized_set](map/randomized_set.py)
     - [valid_sudoku](map/valid_sudoku.py)
@@ -161,6 +174,11 @@ To run the tests, clone the repo and run :
     - [binary_search](search/binary_search.py)
     - [first_occurance](search/first_occurance.py)
     - [last_occurance](search/last_occurance.py)
+    - [search_insert](search/search_insert.py)
+    - [two_sum](search/two_sum.py)
+    - [search_range](search/search_range.py)
+    - [find_min_rotate](search/find_min_rotate.py)
+    - [search_rotate](search/search_rotate.py)
 - [set](set)
     - [randomized_set](set/randomized_set.py)
     - [set_covering](set/set_covering.py)
@@ -188,6 +206,9 @@ To run the tests, clone the repo and run :
     - [remove_min](stack/remove_min.py)
     - [is_sorted](stack/is_sorted.py)
 - [strings](strings)
+    - [delete_reoccurring_characters](strings/delete_reoccurring_characters.py)
+    - [strip_url_params](strings/strip_url_params.py)
+    - [validate_coordinates](strings/validate_coordinates.py)
     - [domain_extractor](strings/domain_extractor.py)
     - [merge_string_checker](strings/merge_string_checker.py)
     - [add_binary](strings/add_binary.py)
