@@ -1,27 +1,33 @@
-from strings.add_binary import add_binary
-from strings.breaking_bad import match_symbol, match_symbol_1, bracket
-from strings.decode_string import decode_string
-from strings.delete_reoccurring import delete_reoccurring_characters
-from strings.domain_extractor import domain_name_1, domain_name_2
-from strings.encode_decode import encode, decode
-from strings.group_anagrams import group_anagrams
-from strings.int_to_roman import int_to_roman
-from strings.is_palindrome import is_palindrome, is_palindrome_reverse, \
-is_palindrome_two_pointer, is_palindrome_stack
-from strings.is_rotated import is_rotated
-from strings.license_number import license_number
-from strings.make_sentence import make_sentence
-from strings.merge_string_checker import is_merge_recursive, is_merge_iterative
-from strings.multiply_strings import multiply
-from strings.one_edit_distance import is_one_edit, is_one_edit2
-from strings.rabin_karp import rabin_karp
-from strings.reverse_string import *
-from strings.reverse_vowel import reverse_vowel
-from strings.reverse_words import reverse_words
-from strings.roman_to_int import roman_to_int
-from strings.strip_url_params import *
-from strings.validate_coordinates import *
-from strings.word_squares import word_squares
+from algorithms.strings import (
+    add_binary,
+    match_symbol, match_symbol_1, bracket,
+    decode_string,
+    delete_reoccurring_characters,
+    domain_name_1, domain_name_2,
+    encode, decode,
+    group_anagrams,
+    int_to_roman,
+    is_palindrome, is_palindrome_reverse,
+    is_palindrome_two_pointer, is_palindrome_stack,
+    is_rotated,
+    license_number,
+    make_sentence,
+    is_merge_recursive, is_merge_iterative,
+    multiply,
+    is_one_edit, is_one_edit2,
+    rabin_karp,
+    ultra_pythonic, iterative, recursive, pythonic,
+    reverse_vowel,
+    reverse_words,
+    roman_to_int,
+    strip_url_params1, strip_url_params2, strip_url_params3,
+    is_valid_coordinates_0, is_valid_coordinates_1,
+    is_valid_coordinates_regular_expression,
+    word_squares,
+    convert_morse_word, unique_morse,
+    judge_circle,
+    strong_password
+)
 
 import unittest
 
@@ -288,7 +294,7 @@ class TestReverseString(unittest.TestCase):
         self.assertEqual("ereht olleh", pythonic("hello there"))
     def test_ultra_pythonic(self):
         self.assertEqual("ereht olleh", ultra_pythonic("hello there"))
-    
+
 
 class TestReverseVowel(unittest.TestCase):
     """[summary]
@@ -378,6 +384,22 @@ class TestWordSquares(unittest.TestCase):
         self.assertEqual([['wall', 'area', 'lead', 'lady'], ['ball', 'area', 'lead', 'lady']], \
         word_squares(["area","lead","wall","lady","ball"]))
 
+class TestUniqueMorse(unittest.TestCase):
+    def test_convert_morse_word(self):
+        self.assertEqual("--...-.", convert_morse_word("gin"))
+        self.assertEqual("--...--.", convert_morse_word("msg"))
+    def test_unique_morse(self):
+        self.assertEqual(2, unique_morse(["gin", "zen", "gig", "msg"]))
+
+class TestJudgeCircle(unittest.TestCase):
+    def test_judge_circle(self):
+        self.assertTrue(judge_circle("UDLRUD"))
+        self.assertFalse(judge_circle("LLRU"))
+
+class TestStrongPassword(unittest.TestCase):
+    def test_strong_password(self):
+        self.assertEqual(3, strong_password(3,"Ab1"))
+        self.assertEqual(1, strong_password(11,"#Algorithms"))
 
 if __name__ == "__main__":
     unittest.main()
