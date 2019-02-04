@@ -1,18 +1,21 @@
 from algorithms.maths import (
     int_to_base, base_to_int,
     decimal_to_binary_ip,
+    euler_totient,
     extended_gcd,
     factorial, factorial_recur,
     gcd, lcm,
     gen_strobogrammatic, strobogrammatic_in_range,
     is_strobogrammatic, is_strobogrammatic2,
+    modular_exponential,
     find_next_square, find_next_square2,
-    prime_check, prime_check2,
-    primes,
+    prime_check,
+    get_primes,
     pythagoras,
     is_prime,
-    encrypt, decrypt, generate_key,
-    combination
+    encrypt, decrypt,
+    combination, combination_memo,
+    hailstone,
 )
 
 import unittest
@@ -35,8 +38,8 @@ class TestBaseConversion(unittest.TestCase):
         self.assertEqual(5, base_to_int("101", 2))
         self.assertEqual(0, base_to_int("0", 2))
         self.assertEqual(255, base_to_int("FF", 16))
-        
-        
+
+
 class TestDecimalToBinaryIP(unittest.TestCase):
     """
     Test for the file decimal_to_binary_ip.py
@@ -46,9 +49,27 @@ class TestDecimalToBinaryIP(unittest.TestCase):
     """
 
     def test_decimal_to_binary_ip(self):
-        self.assertEqual("00000000.00000000.00000000.00000000", decimal_to_binary_ip("0.0.0.0"))
-        self.assertEqual("11111111.11111111.11111111.11111111", decimal_to_binary_ip("255.255.255.255"))
-        self.assertEqual("11000000.10101000.00000000.00000001", decimal_to_binary_ip("192.168.0.1"))
+        self.assertEqual("00000000.00000000.00000000.00000000",
+                         decimal_to_binary_ip("0.0.0.0"))
+        self.assertEqual("11111111.11111111.11111111.11111111",
+                         decimal_to_binary_ip("255.255.255.255"))
+        self.assertEqual("11000000.10101000.00000000.00000001",
+                         decimal_to_binary_ip("192.168.0.1"))
+
+
+class TestEulerTotient(unittest.TestCase):
+    """[summary]
+    Test for the file euler_totient.py
+
+    Arguments:
+        unittest {[type]} -- [description]
+    """
+
+    def test_euler_totient(self):
+        self.assertEqual(4, euler_totient(8))
+        self.assertEqual(12, euler_totient(21))
+        self.assertEqual(311040, euler_totient(674614))
+        self.assertEqual(2354352, euler_totient(3435145))
 
 
 class TestExtendedGcd(unittest.TestCase):
@@ -112,6 +133,22 @@ class TestIsStrobogrammatic(unittest.TestCase):
         self.assertFalse(is_strobogrammatic2("14"))
 
 
+class TestModularExponential(unittest.TestCase):
+    """[summary]
+    Test for the file modular_Exponential.py
+
+    Arguments:
+        unittest {[type]} -- [description]
+    """
+
+    def test_modular_exponential(self):
+        self.assertEqual(1, modular_exponential(5, 117, 19))
+        self.assertEqual(pow(1243, 65321, 10**9 + 7),
+                         modular_exponential(1243, 65321, 10**9 + 7))
+        self.assertEqual(1, modular_exponential(12, 0, 78))
+        self.assertRaises(ValueError, modular_exponential, 12, -2, 455)
+
+
 class TestNextPerfectSquare(unittest.TestCase):
     """[summary]
     Test for the file next_perfect_square.py
@@ -138,7 +175,8 @@ class TestPrimesSieveOfEratosthenes(unittest.TestCase):
     """
 
     def test_primes(self):
-        self.assertEqual([2, 3, 5, 7], primes(7))
+        self.assertListEqual([2, 3, 5, 7], get_primes(7))
+        self.assertRaises(ValueError, get_primes, -42)
 
 
 class TestPrimeTest(unittest.TestCase):
@@ -157,17 +195,6 @@ class TestPrimeTest(unittest.TestCase):
         counter = 0
         for i in range(2, 101):
             if prime_check(i):
-                counter += 1
-        self.assertEqual(25, counter)
-
-    def test_prime_test2(self):
-        """
-            checks all prime numbers between 2 up to 100.
-            Between 2 up to 100 exists 25 prime numbers!
-        """
-        counter = 0
-        for i in range(2, 101):
-            if prime_check2(i):
                 counter += 1
         self.assertEqual(25, counter)
 
@@ -219,6 +246,7 @@ class TestRSA(unittest.TestCase):
     #         dec = decrypt(en, d, n)
     #         self.assertEqual(data,dec)
 
+
 class TestCombination(unittest.TestCase):
     """[summary]
     Test for the file combination.py
@@ -230,7 +258,12 @@ class TestCombination(unittest.TestCase):
     def test_combination(self):
         self.assertEqual(10, combination(5, 2))
         self.assertEqual(252, combination(10, 5))
-        
+
+    def test_combination_memo(self):
+        self.assertEqual(10272278170, combination_memo(50, 10))
+        self.assertEqual(847660528, combination_memo(40, 10))
+
+
 class TestFactorial(unittest.TestCase):
     """[summary]
     Test for the file factorial.py
@@ -243,13 +276,30 @@ class TestFactorial(unittest.TestCase):
         self.assertEqual(1, factorial(0))
         self.assertEqual(120, factorial(5))
         self.assertEqual(3628800, factorial(10))
-        
+        self.assertEqual(637816310, factorial(34521, 10**9 + 7))
+        self.assertRaises(ValueError, factorial, -42)
+        self.assertRaises(ValueError, factorial, 42, -1)
+
     def test_factorial_recur(self):
         self.assertEqual(1, factorial_recur(0))
         self.assertEqual(120, factorial_recur(5))
         self.assertEqual(3628800, factorial_recur(10))
-        
+        self.assertEqual(637816310, factorial_recur(34521, 10**9 + 7))
+        self.assertRaises(ValueError, factorial_recur, -42)
+        self.assertRaises(ValueError, factorial_recur, 42, -1)
+
+
+class TestHailstone(unittest.TestCase):
+    """[summary]
+    Test for the file hailstone.py
+
+    Arguments:
+        unittest {[type]} -- [description]
+    """
+    def test_hailstone(self):
+        self.assertEqual([8, 4, 2, 1], hailstone.hailstone(8))
+        self.assertEqual([10, 5, 16, 8, 4, 2, 1], hailstone.hailstone(10))
+
+
 if __name__ == "__main__":
     unittest.main()
-    
-    

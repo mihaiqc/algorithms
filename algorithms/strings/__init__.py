@@ -24,3 +24,14 @@ from .word_squares import *
 from .unique_morse import *
 from .judge_circle import *
 from .strong_password import *
+from .caesar_cipher import *
+from .contain_string import *
+from .count_binary_substring import *
+from .repeat_string import *
+from .text_justification import *
+from .min_distance import *
+from .longest_common_prefix import *
+from .rotate import *
+from .first_unique_char import *
+from .repeat_substring import *
+from .atbash_cipher import *
